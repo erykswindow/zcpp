@@ -5,3 +5,8 @@ Tile::Tile(Image _image, Location<int> _location) {
 	location = _location;
 	isEmpty = false;
 }
+
+Image Tile::getImage()
+{
+	return image;
+}

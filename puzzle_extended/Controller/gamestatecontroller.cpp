@@ -13,6 +13,11 @@ void GameStateController::setupGameWithImage(Image image) {
 	game = new Game(board, state);
 }
 
+Game *GameStateController::getGame()
+{
+	return game;
+}
+
 std::vector<Tile *> GameStateController::generateTiles(std::vector<std::vector<Image>> images) {
 	std::vector<Tile *> tiles;
 

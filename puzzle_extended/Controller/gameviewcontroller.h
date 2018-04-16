@@ -3,6 +3,8 @@
 #import "viewcontroller.h"
 #import "gamestatecontroller.h"
 
+#include <QGraphicsScene>
+
 class GameViewController: public ViewController {
 private:
 	GameStateController *stateController;
@@ -12,7 +14,7 @@ public:
 
 public:
 	void readInput(QWidget *);
-
+	void drawIn(QGraphicsScene *_graphicsScene);
 };
 
 #endif // GAMEVIEWCONTROLLER_H

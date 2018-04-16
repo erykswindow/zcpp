@@ -11,6 +11,6 @@ void View::setFrame(QRect _frame) {
 	frame = _frame;
 }
 
-void View::addSubview(View *subivew) {
-	subviews.push_back(subview);
+void View::addSubview(View *_subview) {
+	subviews.push_back(_subview);
 }

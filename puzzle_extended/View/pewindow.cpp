@@ -16,11 +16,13 @@ PEWindow::~PEWindow() {
 }
 
 void PEWindow::on_pushButton_clicked() {
-	GameViewController* vc = (GameViewController *)rootViewController;
+	GameViewController* vc = new GameViewController();
 	vc -> readInput(this);
+	this -> gameWindow = new GameWindow(this, vc);
+	this -> gameWindow -> show();
 }
 
-void PEWindow::setRootViewController(GameViewController * _vc) {
+void PEWindow::setRootViewController(ViewController * _vc) {
 	rootViewController = _vc;
 }
 

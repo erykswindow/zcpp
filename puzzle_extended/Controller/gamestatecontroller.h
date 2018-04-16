@@ -15,6 +15,7 @@ public:
 
 public:
 	void setupGameWithImage(Image);
+	Game* getGame();
 
 private:
 	std::vector<Tile *> generateTiles(std::vector<std::vector<Image> > images);

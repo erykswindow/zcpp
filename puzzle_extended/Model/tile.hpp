@@ -6,12 +6,16 @@
 
 class Tile {
 private:
-	Image image;
 	Location<int> location;
+	Image image;
 public:
 	bool isEmpty;
+
 public:
 	Tile(Image, Location<int>);
+
+public:
+	Image getImage();
 };
 
 #endif // TILE_HPP

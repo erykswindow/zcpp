@@ -1,6 +1,8 @@
 #include <QFileDialog>
 #include <QTranslator>
+#include <QGraphicsScene>
 #include "gameviewcontroller.h"
+#include "Model/tile.hpp"
 
 GameViewController::GameViewController() {
 	stateController = new GameStateController();
@@ -18,3 +20,14 @@ void GameViewController::readInput(QWidget *widget) {
 
 	delete dialog;
 }
+
+void GameViewController::drawIn(QGraphicsScene *_graphicsScene) {
+	Board *board = stateController -> getGame() -> board;
+
+	std::vector<Tile *> tiles = board -> tiles;
+	for (int i = tiles.size(); i > 0; i--) {
+		Tile *t = tiles[i];
+		_graphicsScene -> addPixmap(t -> getImage());
+	}
+}
+

@@ -2,7 +2,7 @@
 #define BOARD_HPP
 
 #import <vector>
-#include "tile.hpp"
+#import "tile.hpp"
 
 
 class Board {

@@ -4,10 +4,16 @@ ViewController::ViewController() {
 	view  = new View(QRect(0, 0, 0, 0));
 }
 
+
+
 void ViewController::presentView(QRect _rect) {
 	view -> draw(_rect);
 }
 
 void ViewController::updateView(QRect _rect) {
 	presentView(_rect);
+}
+
+void ViewController::setViewRect(QRect _rect) {
+	view -> setFrame(_rect);
 }
