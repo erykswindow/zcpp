@@ -11,10 +11,10 @@ std::vector<std::vector<Image>> ImageProcessor::divideImage(Image input, int hei
         std::vector<Image> widthVector (width);
 
         for (int w = 0; w < width; w++) {
-            QRect rect = QRect(h * heightPart,
-                               w * widthPart,
-                               (h + 1) * heightPart,
-                               (w + 1 * heightPart));
+			QRect rect = QRect(w * widthPart,
+							   h * heightPart,
+							   widthPart,
+							   heightPart);
 
             widthVector[w] = input.copy(rect);
         }

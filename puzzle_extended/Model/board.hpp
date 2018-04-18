@@ -7,6 +7,8 @@
 
 class Board {
 public:
+	int width;
+	int height;
 	std::vector<Tile *> tiles;
 
 public:

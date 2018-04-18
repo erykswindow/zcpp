@@ -36,7 +36,6 @@ SOURCES += \
     Model/gamestate.cpp \
     Model/game.cpp \
     View/tileview.cpp \
-    View/gamewidget.cpp \
     Controller/mainwindowviewcontroller.cpp \
     View/gamewindow.cpp
 
@@ -54,9 +53,11 @@ HEADERS += \
     Model/location.h \
     Model/game.h \
     View/tileview.h \
-    View/gamewidget.h \
     Controller/mainwindowviewcontroller.h \
-    View/gamewindow.h
+    View/gamewindow.h \
+    Model/direction.h \
+    Model/helperfunctions.h \
+    Model/range.h
 
 FORMS += \
     View/pewindow.ui \

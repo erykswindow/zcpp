@@ -8,13 +8,25 @@
 class GameViewController: public ViewController {
 private:
 	GameStateController *stateController;
+	std::vector<QGraphicsItem *> _currentItems;
+	QSize _screenSize;
+	QGraphicsScene *_scene;
 
 public:
 	GameViewController();
 
 public:
 	void readInput(QWidget *);
-	void drawIn(QGraphicsScene *_graphicsScene);
+	void setScene(QGraphicsScene *);
+	void setScreenSize(QSize);
+	void handleClick(QPoint pos);
+	void start();
+
+public slots:
+
+private:
+	void resetItems();
+	void redraw();
 };
 
 #endif // GAMEVIEWCONTROLLER_H
