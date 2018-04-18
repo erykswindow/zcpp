@@ -17,12 +17,14 @@ GameWindow::GameWindow(QWidget *parent, GameViewController *_viewController) :
 			this, SLOT(on_startButton_clicked()));
 
 	ui -> graphicsView -> setScene(scene);
+	viewController -> setScene(scene);
 }
 
 GameWindow::~GameWindow()
 {
 	delete ui;
 	delete scene;
+	delete viewController;
 }
 
 void GameWindow::on_okButton_clicked() {
@@ -30,5 +32,30 @@ void GameWindow::on_okButton_clicked() {
 }
 
 void GameWindow::on_startButton_clicked() {
-	viewController -> drawIn(this -> scene);
+	viewController -> start();
+}
+
+void GameWindow::resizeEvent(QResizeEvent *_event) {
+	QMainWindow::resizeEvent(_event);
+	QSize size = {
+		ui -> graphicsView -> width(),
+		ui -> graphicsView -> height()
+	};
+
+	viewController -> setScreenSize(size);
+}
+
+void GameWindow::mousePressEvent(QMouseEvent *event) {
+	QPoint pos = event -> globalPos();
+	QPoint nPos = ui -> graphicsView -> mapFromGlobal(pos);
+	viewController -> handleClick(nPos);
+}
+
+void GameWindow::show() {
+	QMainWindow::show();
+	QSize size = {
+		ui -> graphicsView -> width(),
+		ui -> graphicsView -> height()
+	};
+	viewController -> setScreenSize(size);
 }

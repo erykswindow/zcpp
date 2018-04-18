@@ -7,6 +7,7 @@
 class Tile {
 private:
 	Location<int> location;
+	Location<int> desiredLocation;
 	Image image;
 public:
 	bool isEmpty;
@@ -16,6 +17,9 @@ public:
 
 public:
 	Image getImage();
+	Location<int> getLocation();
+	void setLocation(Location<int>);
+	Location<int> getDesiredLocation();
 };
 
 #endif // TILE_HPP
