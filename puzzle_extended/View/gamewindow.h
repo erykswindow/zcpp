@@ -32,6 +32,7 @@ public slots:
 protected:
 	virtual void resizeEvent(QResizeEvent*);
 	virtual void mousePressEvent(QMouseEvent*event);
+	virtual void keyPressEvent(QKeyEvent *ev);
 };
 
 #endif // GAMEWINDOW_H

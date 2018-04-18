@@ -1,10 +1,9 @@
+#include <cmath>
 #include <QFileDialog>
 #include <QTranslator>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include "gameviewcontroller.h"
-#include "Model/tile.hpp"
-#include <cmath>
 
 //COnstructors & Destructors
 GameViewController::GameViewController() {
@@ -55,6 +54,29 @@ void GameViewController::handleClick(QPoint pos) {
 	redraw();
 }
 
+void GameViewController::handleKeboard(QKeyEvent *event) {
+	switch (event -> key()) {
+	case Qt::Key_Up:
+	case Qt::Key_W:
+		stateController -> moveIfPossible(up);
+		break;
+	case Qt::Key_Down:
+	case Qt::Key_S:
+		stateController -> moveIfPossible(down);
+		break;
+	case Qt::Key_Left:
+	case Qt::Key_A:
+		stateController -> moveIfPossible(left);
+		break;
+	case Qt::Key_Right:
+	case Qt::Key_D:
+		stateController -> moveIfPossible(right);
+		break;
+	default:
+		return;
+	}
+}
+
 //Private methods
 void GameViewController::resetItems() {
 	for (std::vector<QGraphicsItem *>::iterator i = _currentItems.begin(); i != _currentItems.end(); i++) {
@@ -88,8 +110,8 @@ void GameViewController::redraw() {
 		}
 
 		QGraphicsPixmapItem *item = _scene -> addPixmap(image);
-		item -> setPos(tile -> getLocation().horizontal * (horizontalStep + spacing.horizontal),
-					   tile -> getLocation().vertical * verticalStep + spacing.vertical);
+		item -> setPos(tile -> getLocation().horizontal * (horizontalStep + spacing.horizontal/2.0),
+					   tile -> getLocation().vertical * verticalStep + spacing.vertical/2.0);
 		_currentItems.push_back(item);
 	}
 }

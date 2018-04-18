@@ -4,7 +4,7 @@
 #include "Model/direction.h"
 #include "Model/helperfunctions.h"
 
-#define RANDOM_SHUFFLE_MOVES 400
+#define RANDOM_SHUFFLE_MOVES 1200
 
 //Constructors & Destructors
 GameStateController::GameStateController() {
@@ -18,7 +18,7 @@ GameStateController::~GameStateController(){
 
 //Public methods
 void GameStateController::setupGameWithImage(Image image) {
-	std::vector<std::vector<Image>> images = imageProcessor -> divideImage(image, 4, 4);
+	std::vector<std::vector<Image>> images = imageProcessor -> divideImage(image, 3, 3);
 	std::vector<Tile *> tiles = generateTiles(images);
 	Board *board = new Board(tiles);
 	GameState *state = new GameState();
@@ -62,7 +62,30 @@ void GameStateController::moveIfPossible(Location<int> _loc) {
 	int hDiff = _loc.horizontal - currentEmpty.horizontal;
 	int vDiff = _loc.vertical - currentEmpty.vertical;
 	int m = abs(hDiff) + abs(vDiff);
-	if (m == 1) replace(currentEmpty, _loc, game -> board -> tiles);
+	if (m == 1 && isInRange(_loc)) replace(currentEmpty, _loc, game -> board -> tiles);
+}
+
+void GameStateController::moveIfPossible(KeyboardDirection _direction) {
+	Tile *emptyTile = getEmptyTile();
+	Location<int> currentEmpty = emptyTile -> getLocation();
+	Location<int> newEmpty = currentEmpty;
+
+	switch (_direction) {
+	case up:
+		newEmpty.vertical += 1;
+		break;
+	case down:
+		newEmpty.vertical -= 1;
+		break;
+	case left:
+		newEmpty.horizontal -= 1;
+		break;
+	case right:
+		newEmpty.horizontal += 1;
+		break;
+	}
+
+	if (isInRange(newEmpty)) replace(currentEmpty, newEmpty, game -> board -> tiles);
 }
 
 void GameStateController::startGame() {
@@ -77,11 +100,14 @@ void GameStateController::replace(Location<int> _loc1, Location<int> _loc2, std:
 	tile1 -> setLocation(_loc2);
 }
 
-void GameStateController::shuffleTiles(std::vector<Tile *> _tiles, int _moves) {
-
+bool GameStateController::isInRange(Location<int> _loc) {
 	Board* b = game -> board;
 	int maxH = b -> width - 1;
 	int maxV = b -> height - 1;
+	return contains({0, maxH}, _loc.horizontal) && contains({0, maxV}, _loc.vertical);
+}
+
+void GameStateController::shuffleTiles(std::vector<Tile *> _tiles, int _moves) {
 	Location<int> emptyLocation = getEmptyTile() -> getLocation();
 
 	for (int i = 0; i < _moves; i++) {
@@ -102,7 +128,7 @@ void GameStateController::shuffleTiles(std::vector<Tile *> _tiles, int _moves) {
 			break;
 		}
 
-		if (contains({0, maxH}, moveLocation.horizontal) && contains( {0, maxV}, moveLocation.vertical)) {
+		if (isInRange(moveLocation)) {
 			replace(emptyLocation, moveLocation, _tiles);
 			emptyLocation = moveLocation;
 		} else {
@@ -118,11 +144,11 @@ Tile *GameStateController::tileWithLocation(Location<int> _loc, std::vector<Tile
 			return tile;
 		}
 	}
-	return 0;
+	return NULL;
 }
 
 Tile *GameStateController::tileWithLocation(Location<int> _loc) {
-	tileWithLocation(_loc, this -> game -> board -> tiles);
+	return tileWithLocation(_loc, this -> game -> board -> tiles);
 }
 
 Tile *GameStateController::getEmptyTile() {
@@ -135,4 +161,5 @@ Tile *GameStateController::getEmptyTile() {
 			return getEmptyTile();
 		}
 	}
+	return NULL;
 }

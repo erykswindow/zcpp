@@ -6,4 +6,11 @@ enum Direction {
 	horizontal = 1
 };
 
+enum KeyboardDirection  {
+	up = 0,
+	down,
+	left,
+	right
+};
+
 #endif // DIRECTION_H

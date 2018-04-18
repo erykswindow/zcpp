@@ -2,7 +2,7 @@
 #define GAMESTATECONTROLLER_H
 #include "imageprocessor.hpp"
 #include "Model/game.h"
-
+#include "Model/direction.h"
 
 class GameStateController {
 private:
@@ -22,6 +22,7 @@ public:
 	bool isGameFinished();
 	void startGame();
 	void moveIfPossible(Location<int> _loc);
+	void moveIfPossible(KeyboardDirection dir);
 
 private:
 	std::vector<Tile *> generateTiles(std::vector<std::vector<Image>>);
@@ -29,6 +30,7 @@ private:
 	void replace(Location<int>, Location<int>, std::vector<Tile *>);
 	Tile *tileWithLocation(Location<int>, std::vector<Tile *>);
 	Tile *getEmptyTile();
+	bool isInRange(Location<int> _loc);
 };
 
 #endif // GAMESTATECONTROLLER_H

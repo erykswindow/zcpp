@@ -18,6 +18,7 @@ GameWindow::GameWindow(QWidget *parent, GameViewController *_viewController) :
 
 	ui -> graphicsView -> setScene(scene);
 	viewController -> setScene(scene);
+	setFocusPolicy(Qt::ClickFocus);
 }
 
 GameWindow::~GameWindow()
@@ -51,6 +52,11 @@ void GameWindow::mousePressEvent(QMouseEvent *event) {
 	viewController -> handleClick(nPos);
 }
 
+void GameWindow::keyPressEvent(QKeyEvent *event) {
+	QMainWindow::keyPressEvent(event);
+	viewController -> handleKeboard(event);
+}
+
 void GameWindow::show() {
 	QMainWindow::show();
 	QSize size = {
@@ -59,3 +65,5 @@ void GameWindow::show() {
 	};
 	viewController -> setScreenSize(size);
 }
+
+
