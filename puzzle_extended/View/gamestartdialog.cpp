@@ -53,12 +53,14 @@ void GameStartDialog::on_setDefault_press() {
 }
 
 void GameStartDialog::on_loadCustom_press() {
-	QFileDialog *dialog = new QFileDialog(this, Qt::Drawer);
-	dialog -> setAcceptMode(QFileDialog::AcceptOpen);
-	dialog -> selectNameFilter(dialog -> tr("Image (*.png, *.jpg, *.jpeg"));
-	QString filename = dialog -> getOpenFileName(this);
+	QString imagePath = QFileDialog::getOpenFileName(
+				this,
+				tr("Open File"),
+				"",
+				tr("JPEG (*.jpg *.jpeg);;PNG (*.png)" )
+				);
 
-	Image image = Image(filename);
+	Image image = Image(imagePath);
 	setImage(image);
 }
 

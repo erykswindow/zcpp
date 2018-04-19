@@ -1,10 +1,9 @@
+#include <cmath>
 #include "gamestatecontroller.h"
 #include "Model/board.hpp"
-#include "Model/Location.h"
+#include "Model/location.h"
 #include "Model/direction.h"
 #include "Model/helperfunctions.h"
-
-#define RANDOM_SHUFFLE_MOVES 1200
 
 //Constructors & Destructors
 GameStateController::GameStateController(Image _image, int _h, int _v) {
@@ -36,10 +35,10 @@ Game *GameStateController::getGame() {
 
 std::vector<Tile *> GameStateController::generateTiles(std::vector<std::vector<Image>> images) {
 	std::vector<Tile *> tiles;
-	for(int i = 0; i < images.size(); i++) {
+	for(size_t i = 0; i < images.size(); i++) {
 		std::vector<Image> row = images[i];
-		for(int j = 0; j < row.size(); j++) {
-			Location<int> location = {j ,i};
+		for(size_t j = 0; j < row.size(); j++) {
+			Location<int> location = {static_cast<int>(j) ,static_cast<int>(i)};
 			Tile *tile = new Tile(row[j], location);
 			tiles.push_back(tile);
 		}
@@ -65,10 +64,10 @@ void GameStateController::moveIfPossible(KeyboardDirection _direction) {
 
 	switch (_direction) {
 	case up:
-		newEmpty.vertical += 1;
+		newEmpty.vertical -= 1;
 		break;
 	case down:
-		newEmpty.vertical -= 1;
+		newEmpty.vertical += 1;
 		break;
 	case left:
 		newEmpty.horizontal -= 1;
@@ -83,7 +82,9 @@ void GameStateController::moveIfPossible(KeyboardDirection _direction) {
 
 void GameStateController::startGame() {
 	std::vector<Tile *> tiles = game -> board -> tiles;
-	this -> shuffleTiles(tiles, RANDOM_SHUFFLE_MOVES);
+	int power = pow(3, fmax(game -> board -> width, game -> board -> height));
+	int moves = fmax(400, power);
+	this -> shuffleTiles(tiles, moves);
 }
 
 void GameStateController::replace(Location<int> _loc1, Location<int> _loc2, std::vector<Tile *> _tiles) {

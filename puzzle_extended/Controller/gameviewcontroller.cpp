@@ -50,23 +50,24 @@ void GameViewController::handleKeboard(QKeyEvent *event) {
 	switch (event -> key()) {
 	case Qt::Key_Up:
 	case Qt::Key_W:
-		stateController -> moveIfPossible(up);
+		stateController -> moveIfPossible(down);
 		break;
 	case Qt::Key_Down:
 	case Qt::Key_S:
-		stateController -> moveIfPossible(down);
+		stateController -> moveIfPossible(up);
 		break;
 	case Qt::Key_Left:
 	case Qt::Key_A:
-		stateController -> moveIfPossible(left);
+		stateController -> moveIfPossible(right);
 		break;
 	case Qt::Key_Right:
 	case Qt::Key_D:
-		stateController -> moveIfPossible(right);
+		stateController -> moveIfPossible(left);
 		break;
 	default:
 		return;
 	}
+	redraw();
 }
 
 //Private methods

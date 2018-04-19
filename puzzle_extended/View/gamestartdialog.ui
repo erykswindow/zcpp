@@ -45,6 +45,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="customButton">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="text">
         <string>Select Image</string>
        </property>
