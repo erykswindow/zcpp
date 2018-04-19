@@ -10,14 +10,17 @@ GameWindow::GameWindow(QWidget *parent, GameViewController *_viewController) :
 
 	scene = new QGraphicsScene();
 
-	connect(ui -> okButton, SIGNAL(clicked()),
-			this, SLOT(on_okButton_clicked()));
+	connect(ui -> saveButton, SIGNAL(clicked()),
+			this, SLOT(on_saveButton_clicked()));
 
 	connect(ui -> startButton, SIGNAL(clicked()),
 			this, SLOT(on_startButton_clicked()));
 
 	ui -> graphicsView -> setScene(scene);
 	viewController -> setScene(scene);
+	setFocusPolicy(Qt::ClickFocus);
+	this -> setAttribute(Qt::WA_DeleteOnClose);
+	this -> grabKeyboard();
 }
 
 GameWindow::~GameWindow()
@@ -27,8 +30,8 @@ GameWindow::~GameWindow()
 	delete viewController;
 }
 
-void GameWindow::on_okButton_clicked() {
-
+void GameWindow::on_saveButton_clicked() {
+	viewController -> handleSave();
 }
 
 void GameWindow::on_startButton_clicked() {
@@ -51,6 +54,11 @@ void GameWindow::mousePressEvent(QMouseEvent *event) {
 	viewController -> handleClick(nPos);
 }
 
+void GameWindow::keyPressEvent(QKeyEvent *event) {
+	QMainWindow::keyPressEvent(event);
+	viewController -> handleKeboard(event);
+}
+
 void GameWindow::show() {
 	QMainWindow::show();
 	QSize size = {
@@ -59,3 +67,5 @@ void GameWindow::show() {
 	};
 	viewController -> setScreenSize(size);
 }
+
+

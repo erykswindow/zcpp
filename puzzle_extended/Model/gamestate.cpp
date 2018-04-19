@@ -1,5 +1,5 @@
 #include "gamestate.h"
 
-GameState::GameState() {
+GameState::GameState(): moves(0), time(0) {
 
 }

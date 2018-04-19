@@ -4,6 +4,7 @@
 #import "gamestatecontroller.h"
 
 #include <QGraphicsScene>
+#include <QKeyEvent>
 
 class GameViewController: public ViewController {
 private:
@@ -13,14 +14,17 @@ private:
 	QGraphicsScene *_scene;
 
 public:
-	GameViewController();
+	GameViewController(Image, int, int);
+	~GameViewController();
 
 public:
 	void readInput(QWidget *);
 	void setScene(QGraphicsScene *);
 	void setScreenSize(QSize);
-	void handleClick(QPoint pos);
+	void handleClick(QPoint);
+	void handleKeboard(QKeyEvent*);
 	void start();
+	void handleSave();
 
 public slots:
 

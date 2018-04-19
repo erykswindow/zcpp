@@ -1,29 +1,20 @@
+#include <cmath>
 #include <QFileDialog>
 #include <QTranslator>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include "gameviewcontroller.h"
-#include "Model/tile.hpp"
-#include <cmath>
 
-//COnstructors & Destructors
-GameViewController::GameViewController() {
-	stateController = new GameStateController();
+//Constructors & Destructors
+GameViewController::GameViewController(Image _image, int _h, int _v) {
+	stateController = new GameStateController(_image, _h, _v);
+}
+
+GameViewController::~GameViewController() {
+	delete stateController;
 }
 
 //Public methods
-void GameViewController::readInput(QWidget *widget) {
-	QFileDialog *dialog = new QFileDialog(widget, Qt::Drawer);
-	dialog -> setAcceptMode(QFileDialog::AcceptOpen);
-	dialog -> selectNameFilter(dialog -> tr("Image (*.png, *.jpg, *.jpeg"));
-	QString filename = dialog -> getOpenFileName(widget);
-
-	Image image = Image(filename);
-
-	stateController -> setupGameWithImage(image);
-
-	delete dialog;
-}
 
 void GameViewController::setScene(QGraphicsScene *_scene) {
 	this -> _scene = _scene;
@@ -40,6 +31,10 @@ void GameViewController::start() {
 	redraw();
 }
 
+void GameViewController::handleSave() {
+	std::cout << stateController -> generateSavefile();
+}
+
 void GameViewController::handleClick(QPoint pos) {
 	Board *board = stateController -> getGame() -> board;
 	double width = _screenSize.width();
@@ -52,6 +47,30 @@ void GameViewController::handleClick(QPoint pos) {
 
 	Location<int> loc = { h, v };
 	stateController -> moveIfPossible(loc);
+	redraw();
+}
+
+void GameViewController::handleKeboard(QKeyEvent *event) {
+	switch (event -> key()) {
+	case Qt::Key_Up:
+	case Qt::Key_W:
+		stateController -> moveIfPossible(down);
+		break;
+	case Qt::Key_Down:
+	case Qt::Key_S:
+		stateController -> moveIfPossible(up);
+		break;
+	case Qt::Key_Left:
+	case Qt::Key_A:
+		stateController -> moveIfPossible(right);
+		break;
+	case Qt::Key_Right:
+	case Qt::Key_D:
+		stateController -> moveIfPossible(left);
+		break;
+	default:
+		return;
+	}
 	redraw();
 }
 
@@ -88,8 +107,8 @@ void GameViewController::redraw() {
 		}
 
 		QGraphicsPixmapItem *item = _scene -> addPixmap(image);
-		item -> setPos(tile -> getLocation().horizontal * (horizontalStep + spacing.horizontal),
-					   tile -> getLocation().vertical * verticalStep + spacing.vertical);
+		item -> setPos(tile -> getLocation().horizontal * (horizontalStep + spacing.horizontal/2.0),
+					   tile -> getLocation().vertical * verticalStep + spacing.vertical/2.0);
 		_currentItems.push_back(item);
 	}
 }
