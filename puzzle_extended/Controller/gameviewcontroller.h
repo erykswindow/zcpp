@@ -24,6 +24,7 @@ public:
 	void handleClick(QPoint);
 	void handleKeboard(QKeyEvent*);
 	void start();
+	void handleSave();
 
 public slots:
 

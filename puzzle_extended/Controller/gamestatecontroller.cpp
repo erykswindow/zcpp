@@ -1,4 +1,5 @@
 #include <cmath>
+#include <sstream>
 #include "gamestatecontroller.h"
 #include "Model/board.hpp"
 #include "Model/location.h"
@@ -8,7 +9,13 @@
 //Constructors & Destructors
 GameStateController::GameStateController(Image _image, int _h, int _v) {
 	imageProcessor = new ImageProcessor;
+	saver = new GameStateSaver;
 	this -> setupGameWithImage(_image, _h, _v);
+}
+
+GameStateController::GameStateController(Image _image, std::string _inputFileName) {
+	imageProcessor = new ImageProcessor;
+	saver = new GameStateSaver;
 }
 
 GameStateController::~GameStateController(){
@@ -164,4 +171,9 @@ Tile *GameStateController::getEmptyTile() {
 		}
 	}
 	return NULL;
+}
+
+std::string GameStateController::generateSavefile() {
+	this -> saver -> saveGame("", this -> game);
+	return "";
 }

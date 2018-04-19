@@ -38,7 +38,8 @@ SOURCES += \
     View/tileview.cpp \
     Controller/mainwindowviewcontroller.cpp \
     View/gamewindow.cpp \
-    View/gamestartdialog.cpp
+    View/gamestartdialog.cpp \
+    Controller/gamestatesaver.cpp
 
 HEADERS += \
     Model/board.hpp \
@@ -59,7 +60,8 @@ HEADERS += \
     Model/direction.h \
     Model/helperfunctions.h \
     Model/range.h \
-    View/gamestartdialog.h
+    View/gamestartdialog.h \
+    Controller/gamestatesaver.h
 
 FORMS += \
     View/pewindow.ui \

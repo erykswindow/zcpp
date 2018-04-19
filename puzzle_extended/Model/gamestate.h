@@ -5,9 +5,8 @@
 class GameState
 {
 public:
-	int startTime;
+	int time;
 	int moves;
-	int currentOrder[16];
 
 	GameState();
 };

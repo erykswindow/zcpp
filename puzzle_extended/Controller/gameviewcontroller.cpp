@@ -31,6 +31,10 @@ void GameViewController::start() {
 	redraw();
 }
 
+void GameViewController::handleSave() {
+	std::cout << stateController -> generateSavefile();
+}
+
 void GameViewController::handleClick(QPoint pos) {
 	Board *board = stateController -> getGame() -> board;
 	double width = _screenSize.width();

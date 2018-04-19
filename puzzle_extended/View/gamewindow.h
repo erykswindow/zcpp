@@ -25,14 +25,13 @@ public:
 public:
 	virtual void show();
 
-public slots:
-	void on_okButton_clicked();
-	void on_startButton_clicked();
-
 protected:
 	virtual void resizeEvent(QResizeEvent*);
 	virtual void mousePressEvent(QMouseEvent*event);
 	virtual void keyPressEvent(QKeyEvent *ev);
+protected slots:
+	void on_startButton_clicked();
+	void on_saveButton_clicked();
 };
 
 #endif // GAMEWINDOW_H

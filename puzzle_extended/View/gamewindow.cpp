@@ -10,8 +10,8 @@ GameWindow::GameWindow(QWidget *parent, GameViewController *_viewController) :
 
 	scene = new QGraphicsScene();
 
-	connect(ui -> okButton, SIGNAL(clicked()),
-			this, SLOT(on_okButton_clicked()));
+	connect(ui -> saveButton, SIGNAL(clicked()),
+			this, SLOT(on_saveButton_clicked()));
 
 	connect(ui -> startButton, SIGNAL(clicked()),
 			this, SLOT(on_startButton_clicked()));
@@ -30,8 +30,8 @@ GameWindow::~GameWindow()
 	delete viewController;
 }
 
-void GameWindow::on_okButton_clicked() {
-
+void GameWindow::on_saveButton_clicked() {
+	viewController -> handleSave();
 }
 
 void GameWindow::on_startButton_clicked() {
