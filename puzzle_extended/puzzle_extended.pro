@@ -37,7 +37,8 @@ SOURCES += \
     Model/game.cpp \
     View/tileview.cpp \
     Controller/mainwindowviewcontroller.cpp \
-    View/gamewindow.cpp
+    View/gamewindow.cpp \
+    View/gamestartdialog.cpp
 
 HEADERS += \
     Model/board.hpp \
@@ -57,8 +58,15 @@ HEADERS += \
     View/gamewindow.h \
     Model/direction.h \
     Model/helperfunctions.h \
-    Model/range.h
+    Model/range.h \
+    View/gamestartdialog.h
 
 FORMS += \
     View/pewindow.ui \
-    View/gamewindow.ui
+    View/gamewindow.ui \
+    View/gamestartdialog.ui
+
+RESOURCES += \
+    resources.qrc
+
+DISTFILES +=

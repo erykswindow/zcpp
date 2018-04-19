@@ -14,7 +14,8 @@ private:
 	QGraphicsScene *_scene;
 
 public:
-	GameViewController();
+	GameViewController(Image, int, int);
+	~GameViewController();
 
 public:
 	void readInput(QWidget *);

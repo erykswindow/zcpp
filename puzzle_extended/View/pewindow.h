@@ -2,6 +2,7 @@
 #define PEWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
 #import "Controller/gameviewcontroller.h"
 #import "gamewindow.h"
 
@@ -16,9 +17,11 @@ class PEWindow : public QMainWindow
 private:
 	Ui::PEWindow *ui;
 	ViewController *rootViewController;
+	QGraphicsScene *scene;
 
 private:
 	GameWindow *gameWindow;
+
 
 public:
     explicit PEWindow(QWidget *parent = 0);
@@ -27,6 +30,9 @@ public:
 public:
 	void setRootViewController(ViewController *);
 	virtual void show();
+
+private:
+	void setImage();
 
 private slots:
     void on_pushButton_clicked();

@@ -5,24 +5,16 @@
 #include <QGraphicsPixmapItem>
 #include "gameviewcontroller.h"
 
-//COnstructors & Destructors
-GameViewController::GameViewController() {
-	stateController = new GameStateController();
+//Constructors & Destructors
+GameViewController::GameViewController(Image _image, int _h, int _v) {
+	stateController = new GameStateController(_image, _h, _v);
+}
+
+GameViewController::~GameViewController() {
+	delete stateController;
 }
 
 //Public methods
-void GameViewController::readInput(QWidget *widget) {
-	QFileDialog *dialog = new QFileDialog(widget, Qt::Drawer);
-	dialog -> setAcceptMode(QFileDialog::AcceptOpen);
-	dialog -> selectNameFilter(dialog -> tr("Image (*.png, *.jpg, *.jpeg"));
-	QString filename = dialog -> getOpenFileName(widget);
-
-	Image image = Image(filename);
-
-	stateController -> setupGameWithImage(image);
-
-	delete dialog;
-}
 
 void GameViewController::setScene(QGraphicsScene *_scene) {
 	this -> _scene = _scene;

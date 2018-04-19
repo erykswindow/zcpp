@@ -19,6 +19,7 @@ GameWindow::GameWindow(QWidget *parent, GameViewController *_viewController) :
 	ui -> graphicsView -> setScene(scene);
 	viewController -> setScene(scene);
 	setFocusPolicy(Qt::ClickFocus);
+	this -> setAttribute(Qt::WA_DeleteOnClose);
 }
 
 GameWindow::~GameWindow()

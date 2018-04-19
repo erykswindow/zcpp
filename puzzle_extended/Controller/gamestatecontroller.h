@@ -11,14 +11,13 @@ private:
 	Tile *_emptyTile = NULL;
 
 public:
-	GameStateController();
+	GameStateController(Image image, int h, int v);
 	~GameStateController();
 
 public:
 	Game* getGame();
 	Tile *tileWithLocation(Location<int> _loc);
 
-	void setupGameWithImage(Image);
 	bool isGameFinished();
 	void startGame();
 	void moveIfPossible(Location<int> _loc);
@@ -31,6 +30,7 @@ private:
 	Tile *tileWithLocation(Location<int>, std::vector<Tile *>);
 	Tile *getEmptyTile();
 	bool isInRange(Location<int> _loc);
+	void setupGameWithImage(Image image, int h, int v);
 };
 
 #endif // GAMESTATECONTROLLER_H

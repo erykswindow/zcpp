@@ -7,8 +7,9 @@
 #define RANDOM_SHUFFLE_MOVES 1200
 
 //Constructors & Destructors
-GameStateController::GameStateController() {
+GameStateController::GameStateController(Image _image, int _h, int _v) {
 	imageProcessor = new ImageProcessor;
+	this -> setupGameWithImage(_image, _h, _v);
 }
 
 GameStateController::~GameStateController(){
@@ -17,14 +18,6 @@ GameStateController::~GameStateController(){
 }
 
 //Public methods
-void GameStateController::setupGameWithImage(Image image) {
-	std::vector<std::vector<Image>> images = imageProcessor -> divideImage(image, 3, 3);
-	std::vector<Tile *> tiles = generateTiles(images);
-	Board *board = new Board(tiles);
-	GameState *state = new GameState();
-	game = new Game(board, state);
-}
-
 bool GameStateController::isGameFinished() {
 	typedef std::vector<Tile *> TV;
 	TV tiles = game -> board -> tiles;
@@ -105,6 +98,14 @@ bool GameStateController::isInRange(Location<int> _loc) {
 	int maxH = b -> width - 1;
 	int maxV = b -> height - 1;
 	return contains({0, maxH}, _loc.horizontal) && contains({0, maxV}, _loc.vertical);
+}
+
+void GameStateController::setupGameWithImage(Image image, int h, int v) {
+	std::vector<std::vector<Image>> images = imageProcessor -> divideImage(image, h, v);
+	std::vector<Tile *> tiles = generateTiles(images);
+	Board *board = new Board(tiles);
+	GameState *state = new GameState();
+	game = new Game(board, state);
 }
 
 void GameStateController::shuffleTiles(std::vector<Tile *> _tiles, int _moves) {
