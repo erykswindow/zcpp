@@ -10,6 +10,7 @@ public:
 	int moves;
 
 	GameState();
+	GameState(std::istream&);
 
 	friend std::ostream &operator <<(std::ostream&, const GameState&);
 };

@@ -1,6 +1,7 @@
 #ifndef TILE_HPP
 #define TILE_HPP
 
+#include <iostream>
 #include "image.hpp"
 #include "location.h"
 
@@ -14,6 +15,7 @@ public:
 
 public:
 	Tile(Image, Location<int>);
+	Tile(std::istream&);
 
 public:
 	Image getImage();
@@ -23,5 +25,7 @@ public:
 
 	friend std::ostream &operator <<(std::ostream&, const Tile&);
 };
+
+std::vector<Tile *> generateTiles(std::istream&);
 
 #endif // TILE_HPP

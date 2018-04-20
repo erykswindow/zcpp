@@ -12,6 +12,7 @@ public:
 
 public:
 	Game(Board*, GameState*);
+	Game(std::string);
 	~Game();
 
 	friend std::ostream &operator <<(std::ostream&, const Game&);

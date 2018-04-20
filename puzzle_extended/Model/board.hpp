@@ -13,9 +13,12 @@ public:
 
 public:
 	Board(std::vector<Tile *>);
+	Board(std::istream&);
+
 	~Board();
 
 	friend std::ostream &operator <<(std::ostream&, const Board&);
+
 };
 
 

@@ -32,7 +32,7 @@ void GameViewController::start() {
 }
 
 void GameViewController::handleSave() {
-	std::cout << stateController -> generateSavefile();
+	stateController -> generateSavefile();
 }
 
 void GameViewController::handleClick(QPoint pos) {
