@@ -1,9 +1,9 @@
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
-#import <vector>
-#import "tile.hpp"
-
+#include <iostream>
+#include <vector>
+#include "tile.hpp"
 
 class Board {
 public:
@@ -13,7 +13,12 @@ public:
 
 public:
 	Board(std::vector<Tile *>);
+	Board(std::istream&);
+
 	~Board();
+
+	friend std::ostream &operator <<(std::ostream&, const Board&);
+
 };
 
 

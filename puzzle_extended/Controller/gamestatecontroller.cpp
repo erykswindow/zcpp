@@ -13,9 +13,10 @@ GameStateController::GameStateController(Image _image, int _h, int _v) {
 	this -> setupGameWithImage(_image, _h, _v);
 }
 
-GameStateController::GameStateController(Image _image, std::string _inputFileName) {
+GameStateController::GameStateController(Image _image) {
 	imageProcessor = new ImageProcessor;
 	saver = new GameStateSaver;
+	saver -> loadGame(&game);
 }
 
 GameStateController::~GameStateController(){
@@ -174,7 +175,6 @@ Tile *GameStateController::getEmptyTile() {
 	return NULL;
 }
 
-std::string GameStateController::generateSavefile() {
-	this -> saver -> saveGame("", this -> game);
-	return "";
+void GameStateController::generateSavefile() {
+	this -> saver -> saveGame(this -> game);
 }

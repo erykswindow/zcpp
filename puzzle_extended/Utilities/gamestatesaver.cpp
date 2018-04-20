@@ -1,29 +1,28 @@
-#include <sstream>
+#include <fstream>
 #include <iostream>
 #include "gamestatesaver.h"
 
-#define LOCATION_DELIMITER "|"
+#define SAVEFILE_NAME "amazingsavefile"
 
 GameStateSaver::GameStateSaver() { }
 
-void GameStateSaver::saveGame(std::string filename, Game *game) {
-	std::vector<Tile *> tiles = game -> board -> tiles;
-	std::string status = "";
-
-	for (std::vector<Tile *>::iterator i = tiles.begin(); i != tiles.end(); i++)  {
-		Tile *tile = *i;
-		Location<int> loc = tile -> getLocation();
-		Location<int> des = tile -> getDesiredLocation();
-		std::ostringstream stringStream;
-		stringStream << "des:" << "{" << des.horizontal << des.vertical << "}";
-		stringStream << "loc:" << "{" << loc.horizontal << des.vertical << "}";
-		stringStream << LOCATION_DELIMITER;
-		std::string tileString = stringStream.str();
-		status += tileString;
+void GameStateSaver::saveGame(Game *_game) {
+	std::ofstream file(SAVEFILE_NAME);
+	if (file.good()) {
+		file << *_game;;
 	}
-	std::cout << status;
+	file.close();
 }
 
-void GameStateSaver::loadGame(std::string filename, Game *game) {
-
+void GameStateSaver::loadGame(Game **_game) {
+	std::ifstream file(SAVEFILE_NAME);
+	if (file.good()) {
+		std::string input;
+		file >> std::skipws >> input;
+		Game *g = new Game(input);
+		*_game = g;
+	}
+	file.close();
 }
+
+

@@ -16,7 +16,7 @@ private:
 
 public:
 	GameStateController(Image image, int h, int v);
-	GameStateController(Image _image, std::string _inputFileName);
+	GameStateController(Image _image);
 	~GameStateController();
 
 public:
@@ -26,7 +26,7 @@ public:
 	void startGame();
 	void moveIfPossible(Location<int> _loc);
 	void moveIfPossible(MovementDirection dir);
-	std::string generateSavefile();
+	void generateSavefile();
 
 private:
 	std::vector<Tile *> generateTiles(std::vector<std::vector<Image>>);

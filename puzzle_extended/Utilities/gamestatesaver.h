@@ -7,8 +7,8 @@ class GameStateSaver
 {
 public:
 	GameStateSaver();
-	void saveGame(std::string filename, Game *game);
-	void loadGame(std::string filename, Game *game);
+	void saveGame(Game*);
+	void loadGame(Game**);
 };
 
 #endif // GAMESTATESAVER_H
