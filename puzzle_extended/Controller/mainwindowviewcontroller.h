@@ -1,9 +1,9 @@
 #ifndef MAINWINDOWVIEWCONTROLLER_H
 #define MAINWINDOWVIEWCONTROLLER_H
 
-#import "viewcontroller.h"
+#include "controller.h"
 
-class MainWindowViewController : public ViewController
+class MainWindowViewController : public Controller
 {
 public:
 	MainWindowViewController();

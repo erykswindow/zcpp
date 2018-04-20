@@ -6,4 +6,8 @@ template<class T> struct Range {
 	T top;
 };
 
+template<class T> bool contains(Range<T> range, T _val) {
+	return  (_val <= range.top) && (_val >= range.bottom);
+}
+
 #endif // RANGE_H

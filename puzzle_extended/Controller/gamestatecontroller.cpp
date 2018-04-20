@@ -4,7 +4,7 @@
 #include "Model/board.hpp"
 #include "Model/location.h"
 #include "Model/direction.h"
-#include "Model/helperfunctions.h"
+#include "Utilities/helperfunctions.h"
 
 //Constructors & Destructors
 GameStateController::GameStateController(Image _image, int _h, int _v) {
@@ -21,6 +21,7 @@ GameStateController::GameStateController(Image _image, std::string _inputFileNam
 GameStateController::~GameStateController(){
 	delete game;
 	delete imageProcessor;
+	delete saver;
 }
 
 //Public methods
@@ -64,7 +65,7 @@ void GameStateController::moveIfPossible(Location<int> _loc) {
 	if (m == 1 && isInRange(_loc)) replace(currentEmpty, _loc, game -> board -> tiles);
 }
 
-void GameStateController::moveIfPossible(KeyboardDirection _direction) {
+void GameStateController::moveIfPossible(MovementDirection _direction) {
 	Tile *emptyTile = getEmptyTile();
 	Location<int> currentEmpty = emptyTile -> getLocation();
 	Location<int> newEmpty = currentEmpty;

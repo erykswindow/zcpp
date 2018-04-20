@@ -17,12 +17,12 @@ GameViewController::~GameViewController() {
 //Public methods
 
 void GameViewController::setScene(QGraphicsScene *_scene) {
-	this -> _scene = _scene;
+	this -> scene = _scene;
 	redraw();
 }
 
 void GameViewController::setScreenSize(QSize _size) {
-	this -> _screenSize = _size;
+	this -> screenSize = _size;
 	redraw();
 }
 
@@ -37,8 +37,8 @@ void GameViewController::handleSave() {
 
 void GameViewController::handleClick(QPoint pos) {
 	Board *board = stateController -> getGame() -> board;
-	double width = _screenSize.width();
-	double height = _screenSize.height();
+	double width = screenSize.width();
+	double height = screenSize.height();
 	double verticalStep = double(height)/(double)(board -> height);
 	double horizontalStep = double(width)/(double)(board -> width);
 
@@ -76,13 +76,13 @@ void GameViewController::handleKeboard(QKeyEvent *event) {
 
 //Private methods
 void GameViewController::resetItems() {
-	for (std::vector<QGraphicsItem *>::iterator i = _currentItems.begin(); i != _currentItems.end(); i++) {
-		_scene -> removeItem(*i);
+	for (std::vector<QGraphicsItem *>::iterator i = currentItems.begin(); i != currentItems.end(); i++) {
+		scene -> removeItem(*i);
 		delete *i;
 	}
 
 	std::vector<QGraphicsItem *> v;
-	_currentItems = v;
+	currentItems = v;
 }
 
 void GameViewController::redraw() {
@@ -94,8 +94,8 @@ void GameViewController::redraw() {
 
 	for (std::vector<Tile *>::iterator iter = tiles.begin(); iter != tiles.end(); iter++) {
 		Tile *tile = *iter;
-		double width = _screenSize.width();
-		double height = _screenSize.height();
+		double width = screenSize.width();
+		double height = screenSize.height();
 		double verticalStep = double(height)/(double)(board -> height) - spacing.vertical/2.0;
 		double horizontalStep = double(width)/(double)(board -> width)  - spacing.horizontal/2.0;
 
@@ -106,9 +106,9 @@ void GameViewController::redraw() {
 			image.fill(color);
 		}
 
-		QGraphicsPixmapItem *item = _scene -> addPixmap(image);
+		QGraphicsPixmapItem *item = scene -> addPixmap(image);
 		item -> setPos(tile -> getLocation().horizontal * (horizontalStep + spacing.horizontal/2.0),
 					   tile -> getLocation().vertical * verticalStep + spacing.vertical/2.0);
-		_currentItems.push_back(item);
+		currentItems.push_back(item);
 	}
 }

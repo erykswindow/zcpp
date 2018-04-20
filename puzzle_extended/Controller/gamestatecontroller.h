@@ -1,11 +1,13 @@
 #ifndef GAMESTATECONTROLLER_H
 #define GAMESTATECONTROLLER_H
-#include "imageprocessor.hpp"
+
+#include "Controller/controller.h"
+#include "Utilities/imageprocessor.hpp"
+#include "Utilities/gamestatesaver.h"
 #include "Model/game.h"
 #include "Model/direction.h"
-#include "gamestatesaver.h"
 
-class GameStateController {
+class GameStateController: public Controller {
 private:
 	Game *game;
 	ImageProcessor *imageProcessor;
@@ -23,7 +25,7 @@ public:
 	bool isGameFinished();
 	void startGame();
 	void moveIfPossible(Location<int> _loc);
-	void moveIfPossible(KeyboardDirection dir);
+	void moveIfPossible(MovementDirection dir);
 	std::string generateSavefile();
 
 private:

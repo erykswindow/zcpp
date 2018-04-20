@@ -1,17 +1,17 @@
 #ifndef GAMEVIEWCONTROLLER_H
 #define GAMEVIEWCONTROLLER_H
-#import "viewcontroller.h"
-#import "gamestatecontroller.h"
-
 #include <QGraphicsScene>
 #include <QKeyEvent>
 
-class GameViewController: public ViewController {
+#include "controller.h"
+#include "gamestatecontroller.h"
+
+class GameViewController: public Controller {
 private:
 	GameStateController *stateController;
-	std::vector<QGraphicsItem *> _currentItems;
-	QSize _screenSize;
-	QGraphicsScene *_scene;
+	std::vector<QGraphicsItem *> currentItems;
+	QSize screenSize;
+	QGraphicsScene *scene;
 
 public:
 	GameViewController(Image, int, int);

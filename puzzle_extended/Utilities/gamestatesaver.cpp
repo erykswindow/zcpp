@@ -24,7 +24,6 @@ void GameStateSaver::saveGame(std::string filename, Game *game) {
 	std::cout << status;
 }
 
-void GameStateSaver::loadGame(std::string filename, Game *game)
-{
+void GameStateSaver::loadGame(std::string filename, Game *game) {
 
 }

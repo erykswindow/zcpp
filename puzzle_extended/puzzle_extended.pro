@@ -27,46 +27,42 @@ SOURCES += \
     main.cpp \
     Model/board.cpp \
     Model/tile.cpp \
-    Controller/gameviewcontroller.cpp \
-    Controller/imageprocessor.cpp \
-    Controller/viewcontroller.cpp \
-    Controller/gamestatecontroller.cpp \
-    View/pewindow.cpp \
-    View/view.cpp \
     Model/gamestate.cpp \
     Model/game.cpp \
-    View/tileview.cpp \
+    Controller/gameviewcontroller.cpp \
+    Controller/gamestatecontroller.cpp \
     Controller/mainwindowviewcontroller.cpp \
+    Controller/controller.cpp \
     View/gamewindow.cpp \
     View/gamestartdialog.cpp \
-    Controller/gamestatesaver.cpp
+    View/startwindow.cpp \
+    Utilities/gamestatesaver.cpp \
+    Utilities/imageprocessor.cpp
 
 HEADERS += \
     Model/board.hpp \
     Model/tile.hpp \
     Model/image.hpp \
-    Controller/imageprocessor.hpp \
-    Controller/gameviewcontroller.h \
-    Controller/viewcontroller.h \
-    Controller/gamestatecontroller.h \
-    View/pewindow.h \
-    View/view.h \
     Model/gamestate.h \
     Model/location.h \
     Model/game.h \
-    View/tileview.h \
-    Controller/mainwindowviewcontroller.h \
-    View/gamewindow.h \
     Model/direction.h \
-    Model/helperfunctions.h \
     Model/range.h \
+    Controller/gameviewcontroller.h \
+    Controller/gamestatecontroller.h \
+    Controller/mainwindowviewcontroller.h \
+    Controller/controller.h \
+    View/gamewindow.h \
     View/gamestartdialog.h \
-    Controller/gamestatesaver.h
+    View/startwindow.h \
+    Utilities/gamestatesaver.h \
+    Utilities/helperfunctions.h \
+    Utilities/imageprocessor.hpp
 
 FORMS += \
-    View/pewindow.ui \
     View/gamewindow.ui \
-    View/gamestartdialog.ui
+    View/gamestartdialog.ui \
+    View/startwindow.ui
 
 RESOURCES += \
     resources.qrc

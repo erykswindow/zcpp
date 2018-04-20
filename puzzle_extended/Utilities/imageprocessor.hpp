@@ -1,7 +1,7 @@
 #ifndef IMAGEPROCESSOR_HPP
 #define IMAGEPROCESSOR_HPP
 
-#include "../Model/image.hpp"
+#include "Model/image.hpp"
 #include <iostream>
 
 class ImageProcessor {

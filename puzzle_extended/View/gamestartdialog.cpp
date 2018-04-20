@@ -5,7 +5,7 @@
 #include "Controller/gameviewcontroller.h"
 
 #include <QFileDialog>
-#include "pewindow.h"
+#include "startwindow.h"
 
 GameStartDialog::GameStartDialog(QWidget *_parent) :
 	QDialog(_parent),

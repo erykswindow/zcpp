@@ -6,7 +6,7 @@ enum Direction {
 	horizontal = 1
 };
 
-enum KeyboardDirection  {
+enum MovementDirection  {
 	up = 0,
 	down,
 	left,

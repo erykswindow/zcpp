@@ -1,4 +1,4 @@
-#import "View/pewindow.h"
+#import "View/startwindow.h"
 #include <QApplication>
 #import "Controller/MainWindowViewController.h"
 
@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
 	srand( time( NULL ) );
     QApplication a(argc, argv);
-    PEWindow w;
+    StartWindow w;
 	MainWindowViewController *vc = new MainWindowViewController();
 	w.setRootViewController(vc);
     w.show();

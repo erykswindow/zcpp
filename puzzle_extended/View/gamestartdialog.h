@@ -23,12 +23,14 @@ public:
 	explicit GameStartDialog(QWidget *_parent = 0);
 	~GameStartDialog();
 
+public:
 	virtual void show();
+
 private:
 	Ui::GameStartDialog *ui;
 	void setDefaultImage();
-
 	void setImage(Image image);
+
 protected slots:
 	void on_setDefault_press();
 	void on_loadCustom_press();

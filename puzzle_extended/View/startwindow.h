@@ -10,25 +10,21 @@ namespace Ui {
 class PEWindow;
 }
 
-class PEWindow : public QMainWindow
+class StartWindow : public QMainWindow
 {
     Q_OBJECT
 
 private:
 	Ui::PEWindow *ui;
-	ViewController *rootViewController;
+	Controller *rootViewController;
 	QGraphicsScene *scene;
 
-private:
-	GameWindow *gameWindow;
-
+public:
+	explicit StartWindow(QWidget *parent = 0);
+	~StartWindow();
 
 public:
-    explicit PEWindow(QWidget *parent = 0);
-    ~PEWindow();
-
-public:
-	void setRootViewController(ViewController *);
+	void setRootViewController(Controller *);
 	virtual void show();
 
 private:

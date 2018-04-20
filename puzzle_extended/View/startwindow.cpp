@@ -1,43 +1,40 @@
-#import "pewindow.h"
+#include "startwindow.h"
 #include "ui_pewindow.h"
 #include "Model/image.hpp"
-#include "Controller/imageprocessor.hpp"
-#import "Controller/gameviewcontroller.h"
-#import "gamestartdialog.h"
+#include "Utilities/imageprocessor.hpp"
+#include "Controller/gameviewcontroller.h"
+#include "gamestartdialog.h"
 
 #define NEWLINE "\n"
 
-PEWindow::PEWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::PEWindow) {
+StartWindow::StartWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::PEWindow) {
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 	scene = new QGraphicsScene;
     ui->setupUi(this);
 	ui -> graphicsView -> setScene(scene);
 }
 
-PEWindow::~PEWindow() {
+StartWindow::~StartWindow() {
 	delete ui;
 	delete rootViewController;
 	delete scene;
 }
 
-void PEWindow::on_pushButton_clicked() {
-
-
+void StartWindow::on_pushButton_clicked() {
 	GameStartDialog *dialog = new GameStartDialog(this);
 	dialog -> show();
 }
 
-void PEWindow::setRootViewController(ViewController * _vc) {
+void StartWindow::setRootViewController(Controller * _vc) {
 	rootViewController = _vc;
 }
 
-void PEWindow::show() {
+void StartWindow::show() {
 	QMainWindow::show();
 	setImage();
-	rootViewController -> presentView(rect());
 }
 
-void PEWindow::setImage() {
+void StartWindow::setImage() {
 	QString filename(":/LogoImage.jpg");
 
 	Image image = Image(filename);
