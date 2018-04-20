@@ -20,6 +20,8 @@ public:
 	Location<int> getLocation();
 	void setLocation(Location<int>);
 	Location<int> getDesiredLocation();
+
+	friend std::ostream &operator <<(std::ostream&, const Tile&);
 };
 
 #endif // TILE_HPP

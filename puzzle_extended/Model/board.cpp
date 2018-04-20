@@ -14,3 +14,20 @@ Board::~Board() {
 		delete tiles[i];
 	}
 }
+
+std::ostream &operator <<(std::ostream &os, const Board &board) {
+
+	os << "{"
+	   << "\"width\":" << board.width << ","
+	   << "\"height\":" << board.height << ","
+	   << "\"tiles\":"
+		 <<"[";
+	std::vector<Tile *> tiles = board.tiles;
+	for (std::vector<Tile *>::iterator i = tiles.begin(); i != tiles.end(); i++)  {
+		Tile *tile = *i;
+		os << (*tile)
+		   <<",";
+	}
+	os << "]" << "}";
+	return os;
+}
