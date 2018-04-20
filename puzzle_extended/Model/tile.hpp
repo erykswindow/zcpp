@@ -2,23 +2,21 @@
 #define TILE_HPP
 
 #include <iostream>
-#include "image.hpp"
 #include "location.h"
 
 class Tile {
 private:
 	Location<int> location;
 	Location<int> desiredLocation;
-	Image image;
+
 public:
 	bool isEmpty;
 
 public:
-	Tile(Image, Location<int>);
+	Tile(Location<int>);
 	Tile(std::istream&);
 
 public:
-	Image getImage();
 	Location<int> getLocation();
 	void setLocation(Location<int>);
 	Location<int> getDesiredLocation();
@@ -27,5 +25,6 @@ public:
 };
 
 std::vector<Tile *> generateTiles(std::istream&);
+Location<int> generateLocation(std::istream&);
 
 #endif // TILE_HPP

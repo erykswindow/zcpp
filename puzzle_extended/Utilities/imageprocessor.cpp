@@ -1,10 +1,10 @@
 #include "imageprocessor.hpp"
 
-std::vector<std::vector<Image>> ImageProcessor::divideImage(Image input, int height, int width) {
+ImageMatrix ImageProcessor::divideImage(Image input, int height, int width) {
     int heightPart = input.height()/height;
     int widthPart = input.width()/width;
 
-    std::vector<std::vector<Image>> heightVector (height);
+	ImageMatrix heightVector (height);
 
     for (int h = 0; h < height; h++) {
 

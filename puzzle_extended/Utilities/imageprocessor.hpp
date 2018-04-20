@@ -7,7 +7,7 @@
 class ImageProcessor {
 
 public:
-    std::vector<std::vector<Image>> divideImage(Image, int, int);
+	ImageMatrix divideImage(Image, int, int);
 
 };
 

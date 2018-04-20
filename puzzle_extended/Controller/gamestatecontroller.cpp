@@ -7,21 +7,18 @@
 #include "Utilities/helperfunctions.h"
 
 //Constructors & Destructors
-GameStateController::GameStateController(Image _image, int _h, int _v) {
-	imageProcessor = new ImageProcessor;
+GameStateController::GameStateController(int _h, int _v) {
 	saver = new GameStateSaver;
-	this -> setupGameWithImage(_image, _h, _v);
+	this -> setupGame(_h, _v);
 }
 
-GameStateController::GameStateController(Image _image) {
-	imageProcessor = new ImageProcessor;
+GameStateController::GameStateController() {
 	saver = new GameStateSaver;
 	saver -> loadGame(&game);
 }
 
 GameStateController::~GameStateController(){
 	delete game;
-	delete imageProcessor;
 	delete saver;
 }
 
@@ -42,18 +39,16 @@ Game *GameStateController::getGame() {
 	return game;
 }
 
-std::vector<Tile *> GameStateController::generateTiles(std::vector<std::vector<Image>> images) {
+std::vector<Tile *> GameStateController::generateTiles(int _h, int _v) {
 	std::vector<Tile *> tiles;
-	for(size_t i = 0; i < images.size(); i++) {
-		std::vector<Image> row = images[i];
-		for(size_t j = 0; j < row.size(); j++) {
-			Location<int> location = {static_cast<int>(j) ,static_cast<int>(i)};
-			Tile *tile = new Tile(row[j], location);
+	for(int h = 0; h < _h; h++) {
+		for(int v = 0; v < _v; v++) {
+			Location<int> location = {h, v};
+			Tile *tile = new Tile(location);
 			tiles.push_back(tile);
 		}
 	}
 	tiles[tiles.size() - 1] -> isEmpty = true;
-
 	return tiles;
 }
 
@@ -110,9 +105,8 @@ bool GameStateController::isInRange(Location<int> _loc) {
 	return contains({0, maxH}, _loc.horizontal) && contains({0, maxV}, _loc.vertical);
 }
 
-void GameStateController::setupGameWithImage(Image image, int h, int v) {
-	std::vector<std::vector<Image>> images = imageProcessor -> divideImage(image, h, v);
-	std::vector<Tile *> tiles = generateTiles(images);
+void GameStateController::setupGame(int _h, int _v) {
+	std::vector<Tile *> tiles = generateTiles(_h, _v);
 	Board *board = new Board(tiles);
 	GameState *state = new GameState();
 	game = new Game(board, state);

@@ -1,6 +1,6 @@
 #import "View/startwindow.h"
 #include <QApplication>
-#import "Controller/MainWindowViewController.h"
+#include "Controller/mainwindowviewcontroller.h"
 
 int main(int argc, char *argv[])
 {

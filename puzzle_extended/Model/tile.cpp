@@ -1,14 +1,11 @@
-#include "tile.hpp"
-#include "location.h"
 #include <string>
+#include <vector>
+#include "tile.hpp"
 
 #define DESIRED_LOCATION_KEY "\"desired_location\":"
 #define LOCATION_KEY "\"location\":"
 
-Location<int> makeLocation(std::istream&);
-
-Tile::Tile(Image _image, Location<int> _location): location(_location), desiredLocation(_location) {
-	image = _image;
+Tile::Tile(Location<int> _location): location(_location), desiredLocation(_location) {
 	isEmpty = false;
 }
 
@@ -28,31 +25,25 @@ Tile::Tile(std::istream &_input) {
 			currentKey += _input.get();
 		}
 		if (currentKey == DESIRED_LOCATION_KEY) {
-			desiredLocation = makeLocation(_input);
+			desiredLocation = generateLocation(_input);
 			parsedDesiredLocation = true;
 		} else if (currentKey == LOCATION_KEY) {
-			location = makeLocation(_input);
+			location = generateLocation(_input);
 			parsedLocation = true;
 		}
 	}
 	while (_input.get() != '}') {}
 }
 
-Image Tile::getImage() {
-	return this -> image;
-}
-
 Location<int> Tile::getLocation() {
 	return location;
 }
 
-void Tile::setLocation(Location<int> _loc)
-{
+void Tile::setLocation(Location<int> _loc) {
 	location = _loc;
 }
 
-Location<int> Tile::getDesiredLocation()
-{
+Location<int> Tile::getDesiredLocation() {
 	return desiredLocation;
 }
 
@@ -78,10 +69,9 @@ std::vector<Tile *> generateTiles(std::istream &_input) {
 	return tiles;
 }
 
-Location<int> makeLocation(std::istream &_input) {
-	typedef int T;
-	T hor;
-	T vert;
+Location<int> generateLocation(std::istream &_input) {
+	int hor;
+	int vert;
 	while(_input.get() != '{') {
 		_input.ignore();
 	}

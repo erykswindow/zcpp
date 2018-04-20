@@ -10,13 +10,12 @@
 class GameStateController: public Controller {
 private:
 	Game *game;
-	ImageProcessor *imageProcessor;
 	GameStateSaver *saver;
 	Tile *_emptyTile = NULL;
 
 public:
-	GameStateController(Image image, int h, int v);
-	GameStateController(Image _image);
+	GameStateController(int h, int v);
+	GameStateController();
 	~GameStateController();
 
 public:
@@ -29,13 +28,13 @@ public:
 	void generateSavefile();
 
 private:
-	std::vector<Tile *> generateTiles(std::vector<std::vector<Image>>);
+	std::vector<Tile *> generateTiles(int, int);
 	void shuffleTiles(std::vector<Tile *>, int);
 	void replace(Location<int>, Location<int>, std::vector<Tile *>);
 	Tile *tileWithLocation(Location<int>, std::vector<Tile *>);
 	Tile *getEmptyTile();
-	bool isInRange(Location<int> _loc);
-	void setupGameWithImage(Image image, int h, int v);
+	bool isInRange(Location<int>);
+	void setupGame(int, int);
 };
 
 #endif // GAMESTATECONTROLLER_H

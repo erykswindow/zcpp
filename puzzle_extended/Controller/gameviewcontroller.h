@@ -5,11 +5,15 @@
 
 #include "controller.h"
 #include "gamestatecontroller.h"
+#include "Utilities/imageprocessor.hpp"
+#include "Model/image.hpp"
 
 class GameViewController: public Controller {
 private:
 	GameStateController *stateController;
+	ImageProcessor *imageProcessor;
 	std::vector<QGraphicsItem *> currentItems;
+	ImageMatrix images;
 	QSize screenSize;
 	QGraphicsScene *scene;
 
@@ -18,8 +22,8 @@ public:
 	~GameViewController();
 
 public:
-	void readInput(QWidget *);
-	void setScene(QGraphicsScene *);
+	void readInput(QWidget*);
+	void setScene(QGraphicsScene*);
 	void setScreenSize(QSize);
 	void handleClick(QPoint);
 	void handleKeboard(QKeyEvent*);

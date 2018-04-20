@@ -7,13 +7,15 @@
 
 //Constructors & Destructors
 GameViewController::GameViewController(Image _image, int _h, int _v) {
-	stateController = new GameStateController(_image, _h, _v);
+	imageProcessor = new ImageProcessor;
+	stateController = new GameStateController(_h, _v);
+	images = imageProcessor -> divideImage(_image, _h, _v);
 }
 
 GameViewController::~GameViewController() {
 	delete stateController;
+	delete imageProcessor;
 }
-
 //Public methods
 
 void GameViewController::setScene(QGraphicsScene *_scene) {
@@ -98,8 +100,10 @@ void GameViewController::redraw() {
 		double height = screenSize.height();
 		double verticalStep = double(height)/(double)(board -> height) - spacing.vertical/2.0;
 		double horizontalStep = double(width)/(double)(board -> width)  - spacing.horizontal/2.0;
+		Location<int> loc = tile -> getLocation();
+		Location<int> imageLoc = tile -> getDesiredLocation();
 
-		Image image = tile -> getImage().scaled(horizontalStep, verticalStep);
+		Image image = images[imageLoc.vertical][imageLoc.horizontal].scaled(horizontalStep, verticalStep);
 
 		if (tile -> isEmpty) {
 			QColor color = QColor(0, 0, 0);
@@ -107,8 +111,8 @@ void GameViewController::redraw() {
 		}
 
 		QGraphicsPixmapItem *item = scene -> addPixmap(image);
-		item -> setPos(tile -> getLocation().horizontal * (horizontalStep + spacing.horizontal/2.0),
-					   tile -> getLocation().vertical * verticalStep + spacing.vertical/2.0);
+		item -> setPos(loc.horizontal * (horizontalStep + spacing.horizontal/2.0),
+					   loc.vertical * verticalStep + spacing.vertical/2.0);
 		currentItems.push_back(item);
 	}
 }
