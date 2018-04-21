@@ -18,9 +18,11 @@ GameWindow::GameWindow(QWidget *parent, GameViewController *_viewController) :
 
 	ui -> graphicsView -> setScene(scene);
 	viewController -> setScene(scene);
+	viewController -> setUpdateHandler(this);
 	setFocusPolicy(Qt::ClickFocus);
 	this -> setAttribute(Qt::WA_DeleteOnClose);
 	this -> grabKeyboard();
+
 }
 
 GameWindow::~GameWindow()
@@ -36,6 +38,12 @@ void GameWindow::on_saveButton_clicked() {
 
 void GameWindow::on_startButton_clicked() {
 	viewController -> start();
+	resumeGame();
+}
+
+void GameWindow::resumeGame() {
+	if (timerId != 0) this -> killTimer(timerId);
+	timerId = this -> startTimer(1000);
 }
 
 void GameWindow::resizeEvent(QResizeEvent *_event) {
@@ -57,6 +65,19 @@ void GameWindow::mousePressEvent(QMouseEvent *event) {
 void GameWindow::keyPressEvent(QKeyEvent *event) {
 	QMainWindow::keyPressEvent(event);
 	viewController -> handleKeboard(event);
+}
+
+void GameWindow::timerEvent(QTimerEvent *event) {
+	viewController -> incrementTimer();
+}
+
+void GameWindow::update() {
+	QString time = QString::fromStdString(std::to_string(viewController -> getCurrentTime()));
+	QString moves = QString::fromStdString(std::to_string(viewController -> getCurrentMoves()));
+	ui -> timeValueLabel -> setText(time);
+	ui -> movesValueLabel -> setText(moves);
+	ui -> startButton -> setEnabled(viewController -> currentGameStatus());
+	ui -> saveButton -> setEnabled(!(viewController -> currentGameStatus()));
 }
 
 void GameWindow::show() {

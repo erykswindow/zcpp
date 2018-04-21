@@ -28,13 +28,12 @@ Game::Game(std::string _input) {
 				board = new Board(ss);
 				boardParsed = true;
 			} else if (currentKey == STATE_KEY) {
-				state = new GameState;
+				state = new GameState(ss);
 				stateParsed = true;
 			}
 		}
 
 		while (ss.get() != EOF);
-		std::cout << this;
 }
 
 Game::~Game() {

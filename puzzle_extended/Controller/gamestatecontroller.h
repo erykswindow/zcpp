@@ -27,6 +27,9 @@ public:
 	void moveIfPossible(MovementDirection dir);
 	void generateSavefile();
 
+	GameState currentState();
+
+	void incrementTimer();
 private:
 	std::vector<Tile *> generateTiles(int, int);
 	void shuffleTiles(std::vector<Tile *>, int);

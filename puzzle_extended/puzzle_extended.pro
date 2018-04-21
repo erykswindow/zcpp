@@ -37,7 +37,9 @@ SOURCES += \
     View/gamestartdialog.cpp \
     View/startwindow.cpp \
     Utilities/gamestatesaver.cpp \
-    Utilities/imageprocessor.cpp
+    Utilities/imageprocessor.cpp \
+    View/gameloaddialog.cpp \
+    View/gamebegindialog.cpp
 
 HEADERS += \
     Model/board.hpp \
@@ -57,12 +59,16 @@ HEADERS += \
     View/startwindow.h \
     Utilities/gamestatesaver.h \
     Utilities/helperfunctions.h \
-    Utilities/imageprocessor.hpp
+    Utilities/imageprocessor.hpp \
+    Controller/updateable.h \
+    View/gameloaddialog.h \
+    View/gamebegindialog.h
 
 FORMS += \
     View/gamewindow.ui \
     View/gamestartdialog.ui \
-    View/startwindow.ui
+    View/startwindow.ui \
+    View/gameloaddialog.ui
 
 RESOURCES += \
     resources.qrc

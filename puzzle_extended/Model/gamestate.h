@@ -13,6 +13,9 @@ public:
 	GameState(std::istream&);
 
 	friend std::ostream &operator <<(std::ostream&, const GameState&);
+
+	void incrementTime();
+	void incrementMoves();
 };
 
 #endif // GAMESTATE_H

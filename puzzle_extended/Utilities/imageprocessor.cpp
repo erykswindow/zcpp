@@ -1,24 +1,22 @@
 #include "imageprocessor.hpp"
 
-ImageMatrix ImageProcessor::divideImage(Image input, int height, int width) {
-    int heightPart = input.height()/height;
-    int widthPart = input.width()/width;
+ImageMatrix ImageProcessor::divideImage(Image input, int width, int height) {
+	int widthPart = input.width()/width;
+	int heightPart = input.height()/height;
 
-	ImageMatrix heightVector (height);
+	ImageMatrix columns (height);
 
-    for (int h = 0; h < height; h++) {
-
-        std::vector<Image> widthVector (width);
-
-        for (int w = 0; w < width; w++) {
-			QRect rect = QRect(w * widthPart,
-							   h * heightPart,
+	for (int v = 0; v < height; v++) {
+		std::vector<Image> row (width);
+		 for (int h = 0; h < width; h++) {
+			QRect rect = QRect(h * widthPart,
+							   v * heightPart,
 							   widthPart,
 							   heightPart);
 
-            widthVector[w] = input.copy(rect);
+			row[h] = input.copy(rect);
         }
-        heightVector[h] = widthVector;
+		columns[v] = row;
     }
-    return heightVector;
+	return columns;
 }

@@ -7,6 +7,7 @@
 #include "gamestatecontroller.h"
 #include "Utilities/imageprocessor.hpp"
 #include "Model/image.hpp"
+#include "updateable.h"
 
 class GameViewController: public Controller {
 private:
@@ -16,9 +17,11 @@ private:
 	ImageMatrix images;
 	QSize screenSize;
 	QGraphicsScene *scene;
+	Updateable *updateHandler;
 
 public:
 	GameViewController(Image, int, int);
+	GameViewController(Image);
 	~GameViewController();
 
 public:
@@ -29,6 +32,14 @@ public:
 	void handleKeboard(QKeyEvent*);
 	void start();
 	void handleSave();
+
+	void incrementTimer();
+
+	int getCurrentMoves();
+	int getCurrentTime();
+	bool currentGameStatus();
+
+	void setUpdateHandler(Updateable*);
 
 public slots:
 

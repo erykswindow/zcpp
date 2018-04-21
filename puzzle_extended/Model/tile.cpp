@@ -1,9 +1,11 @@
 #include <string>
 #include <vector>
+#include <stdlib.h>
 #include "tile.hpp"
 
 #define DESIRED_LOCATION_KEY "\"desired_location\":"
 #define LOCATION_KEY "\"location\":"
+#define IS_EMPTY_KEY "\"is_empty\":"
 
 Tile::Tile(Location<int> _location): location(_location), desiredLocation(_location) {
 	isEmpty = false;
@@ -14,10 +16,11 @@ Tile::Tile(std::istream &_input) {
 
 	bool parsedLocation = false;
 	bool parsedDesiredLocation = false;
+	bool parsedEmpty = false;
 
-	while(!(parsedDesiredLocation && parsedLocation)) {
+	while(!(parsedDesiredLocation && parsedLocation && parsedEmpty)) {
 		std::string currentKey = "";
-		while (currentKey != DESIRED_LOCATION_KEY && currentKey != LOCATION_KEY) {
+		while (currentKey != DESIRED_LOCATION_KEY && currentKey != LOCATION_KEY && currentKey != IS_EMPTY_KEY) {
 			if (_input.peek() == ',') {
 				_input.ignore();
 				continue;
@@ -30,6 +33,10 @@ Tile::Tile(std::istream &_input) {
 		} else if (currentKey == LOCATION_KEY) {
 			location = generateLocation(_input);
 			parsedLocation = true;
+		} else if (currentKey == IS_EMPTY_KEY) {
+			char empty = _input.get();
+			isEmpty = empty == '0' ? false : true;
+			parsedEmpty = true;
 		}
 	}
 	while (_input.get() != '}') {}
@@ -51,6 +58,7 @@ std::ostream &operator <<(std::ostream &os, const Tile &tile) {
 	os << "{"
 		<< DESIRED_LOCATION_KEY << tile.desiredLocation << ","
 		<< LOCATION_KEY << tile.location
+		<< IS_EMPTY_KEY << (tile.isEmpty ? 1 : 0)
 		<<"}";
 	return os;
 }

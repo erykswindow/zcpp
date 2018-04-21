@@ -22,7 +22,7 @@ GameState::GameState(std::istream &_input) {
 			currentKey += _input.get();
 		}
 		std::string valueBuf = "";
-		while(_input.peek() != ',' || _input.peek() != '}') {
+		while(_input.peek() != ',' && _input.peek() != '}') {
 			valueBuf += _input.get();
 		}
 		if (currentKey == MOVES_KEY) {
@@ -34,6 +34,14 @@ GameState::GameState(std::istream &_input) {
 		}
 	}
 
+}
+
+void GameState::incrementTime() {
+	time++;
+}
+
+void GameState::incrementMoves() {
+	moves++;
 }
 
 std::ostream &operator <<(std::ostream &os, const GameState &state) {

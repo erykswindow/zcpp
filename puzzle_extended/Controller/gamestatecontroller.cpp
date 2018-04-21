@@ -52,13 +52,24 @@ std::vector<Tile *> GameStateController::generateTiles(int _h, int _v) {
 	return tiles;
 }
 
+GameState GameStateController::currentState() {
+	return *(game ->state);
+}
+
+void GameStateController::incrementTimer() {
+	game -> state -> incrementTime();
+}
+
 void GameStateController::moveIfPossible(Location<int> _loc) {
 	Tile *emptyTile = getEmptyTile();
 	Location<int> currentEmpty = emptyTile -> getLocation();
 	int hDiff = _loc.horizontal - currentEmpty.horizontal;
 	int vDiff = _loc.vertical - currentEmpty.vertical;
 	int m = abs(hDiff) + abs(vDiff);
-	if (m == 1 && isInRange(_loc)) replace(currentEmpty, _loc, game -> board -> tiles);
+	if (m == 1 && isInRange(_loc)) {
+		replace(currentEmpty, _loc, game -> board -> tiles);
+		game -> state -> incrementMoves();
+	}
 }
 
 void GameStateController::moveIfPossible(MovementDirection _direction) {
@@ -81,7 +92,10 @@ void GameStateController::moveIfPossible(MovementDirection _direction) {
 		break;
 	}
 
-	if (isInRange(newEmpty)) replace(currentEmpty, newEmpty, game -> board -> tiles);
+	if (isInRange(newEmpty)) {
+		replace(currentEmpty, newEmpty, game -> board -> tiles);
+		game -> state -> incrementMoves();
+	}
 }
 
 void GameStateController::startGame() {

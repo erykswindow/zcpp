@@ -7,7 +7,7 @@
 #import "gamewindow.h"
 
 namespace Ui {
-class PEWindow;
+class StartWindow;
 }
 
 class StartWindow : public QMainWindow
@@ -15,7 +15,7 @@ class StartWindow : public QMainWindow
     Q_OBJECT
 
 private:
-	Ui::PEWindow *ui;
+	Ui::StartWindow *ui;
 	Controller *rootViewController;
 	QGraphicsScene *scene;
 
@@ -32,6 +32,7 @@ private:
 
 private slots:
     void on_pushButton_clicked();
+	void on_loadGame_clicked();
 
 };
 
